@@ -1,0 +1,31 @@
+
+syntax = "proto3";
+
+option go_package = "api.v1";
+
+service TrainBooking {
+  rpc BookTicket (TicketRequest) returns (TicketResponse);
+  rpc GetBookingStatus (BookingStatusRequest) returns (BookingStatusResponse);
+}
+
+message TicketRequest {
+  string departure = 1;
+  string destination = 2;
+  string firstName = 3;
+  string lastName = 4;
+  string email = 5;
+  double price = 6;
+}
+
+message TicketResponse {
+  string confirmation = 1;
+  string message = 2;
+}
+
+message BookingStatusRequest {
+  string confirmation = 1;
+}
+
+message BookingStatusResponse {
+  string status = 1;
+}
