@@ -1,0 +1,74 @@
+syntax = "proto3";
+
+option go_package = "api.v1";
+
+service TrainTicketing {
+  rpc PurchaseTicket (PurchaseRequest) returns (PurchaseResponse);
+  rpc GetReceipt (ReceiptRequest) returns (ReceiptResponse);
+  rpc GetUsersBySection (SectionRequest) returns (UsersResponse);
+  rpc RemoveUser (RemoveRequest) returns (RemoveResponse);
+  rpc ModifySeat (ModifySeatRequest) returns (ModifySeatResponse);
+}
+
+message User {
+  string first_name = 1;
+  string last_name = 2;
+  string email = 3;
+}
+
+message PurchaseRequest {
+  User user = 1;
+  string from = 2;
+  string to = 3;
+  string when = 4;
+  double price = 5;
+}
+
+message PurchaseResponse {
+  User user = 1;
+  string receipt_id = 2;
+  string seat = 3;
+  string detail = 4;
+}
+
+message ReceiptRequest {
+  string receipt_id = 1;
+}
+
+message ReceiptResponse {
+  string from = 1;
+  string to = 2;
+  User user = 3;
+  string seat = 4;
+  double price = 5;
+}
+
+message SectionRequest {
+  string section = 1; // "A" or "B"
+}
+
+message UsersResponse {
+  repeated UserSeat users = 1;
+}
+
+message UserSeat {
+  string seat = 1;
+  User user = 2;
+}
+
+message RemoveRequest {
+  string email = 1;
+}
+
+message RemoveResponse {
+  bool success = 1;
+}
+
+message ModifySeatRequest {
+  string email = 1;
+  string new_seat = 2;
+}
+
+message ModifySeatResponse {
+  bool success = 1;
+}
