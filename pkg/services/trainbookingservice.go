@@ -55,9 +55,12 @@ func (tb *TrainBookingService) CreateAndLoadSeats(Config *c.Config) {
 			SeatStatus: m.AVAILABLE,
 		}
 		tb.Seats = append(tb.Seats, seatA)
+	}
+	totalSeat := Config.Train.TotalSeats
+	for i := seatPerSection; i < totalSeat; i++ {
 		seatB := &m.Seat{
-			Id:         i + 1,
-			SeatNo:     utill.SECTION_B + strconv.Itoa(i+1),
+			Id:         i + 1 - seatPerSection,
+			SeatNo:     utill.SECTION_B + strconv.Itoa(i+1-seatPerSection),
 			Section:    m.TRAIN_SECTION_B,
 			SeatStatus: m.AVAILABLE,
 		}
@@ -178,8 +181,10 @@ func (tb *TrainBookingService) ModifyUserBookedSeat(req *pb.ModifySeatRequest) e
 			newSeat.UpdateSeatStatus(m.BOOKED)
 			booking.Seat = newSeat
 			return nil
-		} else {
+		} else if newSeat.SeatStatus == m.BOOKED {
 			return errors.New("SEAT ALREADY BOOKED")
+		} else {
+			return errors.New("BOOKING NOT AVAILABLE")
 		}
 	} else {
 		return errors.New("BOOKING NOT AVAILABLE")

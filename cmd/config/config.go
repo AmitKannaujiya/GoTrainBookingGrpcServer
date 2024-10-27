@@ -1,10 +1,14 @@
 package config
 
 import (
+	"fmt"
 	_ "fmt"
 	"log"
 	"os"
 	"sync"
+
+	"path/filepath"
+	"runtime"
 
 	"gopkg.in/yaml.v3"
 )
@@ -29,8 +33,12 @@ type Config struct {
 func GetConfig() (*Config, error) {
 	var config Config
 	var e error
+	_, b, _, _ := runtime.Caller(0)
+	basepath   := filepath.Dir(b)
+	fmt.Println(basepath)
 	once.Do(func() {
-		configFile, err := os.ReadFile("./cmd/config/config.yaml")
+
+		configFile, err := os.ReadFile(basepath + "/config.yaml")
 		if err != nil {
 			log.Printf("Config file not found %v : ", err)
 			e = err
