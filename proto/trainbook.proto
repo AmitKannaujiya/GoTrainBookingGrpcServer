@@ -21,7 +21,8 @@ message PurchaseRequest {
   string from = 2;
   string to = 3;
   string when = 4;
-  double price = 5;
+  string section = 5;
+  double price = 6;
 }
 
 message PurchaseResponse {
@@ -29,6 +30,7 @@ message PurchaseResponse {
   string receipt_id = 2;
   string seat = 3;
   string detail = 4;
+  bool success = 5;
 }
 
 message ReceiptRequest {
@@ -41,6 +43,7 @@ message ReceiptResponse {
   User user = 3;
   string seat = 4;
   double price = 5;
+  bool success = 6;
 }
 
 message SectionRequest {
@@ -49,6 +52,7 @@ message SectionRequest {
 
 message UsersResponse {
   repeated UserSeat users = 1;
+  bool success = 2;
 }
 
 message UserSeat {

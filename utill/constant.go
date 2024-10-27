@@ -1,5 +1,6 @@
 package utill
 
 const (
-	PORT = ":5001"
+	SECTION_A = "A"
+	SECTION_B = "B"
 )
