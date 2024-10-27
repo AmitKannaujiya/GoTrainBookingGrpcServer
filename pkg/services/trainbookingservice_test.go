@@ -39,7 +39,6 @@ func TestGetBookingStatus(t *testing.T) {
     assert.Nil(t, err)
     assert.Equal(t, "London", res2.Source)
 	assert.Equal(t, "France", res2.Destination)
-	//assert.Equal(t, "john.doe@example.com", booking.User.Email)
 }
 
 func TestRemoveUserFromBooking(t *testing.T) {
@@ -106,7 +105,6 @@ func TestGetBookedUserSeatBySection(t *testing.T) {
     assert.Equal(t, 1, len(resA))
     assert.Equal(t, res1.Seat.SeatNo, resA[0].Seat.SeatNo)
     assert.Equal(t, "John", resA[0].User.FirstName)
-	//assert.Equal(t, "receipt-4", booking1.BookingId)
 
     // Testing for Section B
     reqB := &pb.SectionRequest{Section: "B"}
@@ -114,5 +112,4 @@ func TestGetBookedUserSeatBySection(t *testing.T) {
     assert.Equal(t, 1, len(resB))
     assert.Equal(t, res2.Seat.SeatNo, resB[0].Seat.SeatNo)
     assert.Equal(t, "Jane", resB[0].User.FirstName)
-	//assert.Equal(t, "receipt-5", booking2.BookingId)
 }

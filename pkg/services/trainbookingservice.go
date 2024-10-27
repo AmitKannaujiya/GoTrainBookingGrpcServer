@@ -150,7 +150,7 @@ func (tb *TrainBookingService) RemoveUserFromBooking(req *pb.RemoveRequest) erro
 	defer lock.Unlock()
 	email := req.Email
 	if booking, exists := tb.BookedSeats[email]; exists {
-		booking.UpdateBookingStatus(m.BOOKING_STATUS_FAILED)
+		booking.UpdateBookingStatus(m.BOOKING_STATUS_CANCELLED)
 		booking.Seat.UpdateSeatStatus(m.AVAILABLE)
 		for _, seat := range tb.Seats {
 			if seat.Id == booking.Seat.Id {
